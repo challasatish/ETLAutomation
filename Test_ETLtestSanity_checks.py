@@ -13,10 +13,17 @@ def test_DataCompletenss():
     assert not target_df.empty, "Target file is empty- please verify the ETL process"
 
 # test if deptno is a mandatory column
-def test_deptNoForNullValueCheck():
+def test_deptNoForNullValueCheck_True():
     target_df = pd.read_csv('target.csv')
+    target_df.columns = target_df.columns.str.strip() # to remove any leading or whitespace
     isDeptNoNull = target_df['deptno'].isnull().any()
     assert isDeptNoNull == True , "deptno is having a null value - Please check"
+
+# test if deptno is a mandatory column with false condition
+# def test_deptNoForNullValueCheck_False():
+#    target_df = pd.read_csv('target.csv')
+#    isDeptNoNull = target_df['deptno'].isnull().any()
+#    assert isDeptNoNull == False , "deptno is having a null value - Please check"    
 
 #test if eno is always a primary key
 def test_enoNoForUniqueValueCheck():
